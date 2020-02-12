@@ -34,16 +34,19 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
     if(gamePlaying) {
         // 1. random number
         var dice = Math.floor(Math.random() * 6) + 1;
+        var dice2 = Math.floor(Math.random() * 6) + 1;
 
         // 2. display result
-        var diceDOM = document.querySelector('.dice');
-        diceDOM.style.display = 'block';
-        diceDOM.src = 'dice-' + dice + '.png';
+        var diceDOM = document.getElementById('dice-1');
+        diceDOM.src = 'images/dice-' + dice + '.png';
+
+        var diceDOM2 = document.getElementById('dice-2');
+        diceDOM2.src = 'images/dice-' + dice2 + '.png';
 
         // 3. update round score if roll number is NOT 1. 
-        if (dice !== 1) {
+        if (dice !== 1 && dice2 != 1) {
             // add score
-            roundScore += dice;
+            roundScore += dice + dice2;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         } else {
             // next player

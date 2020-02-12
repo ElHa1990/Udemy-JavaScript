@@ -111,47 +111,4 @@ function nextPlayer () {
     // change the active player looks
     document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
-
-    document.querySelector('.dice').style.display = 'none';
 };
-
-
-
-
-
-
-
-
-// document.querySelector('#current-' + activePlayer).textContent = dice;
-// document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>'
-
-// var x = document.querySelector('#score-0').textContent;
-// console.log(x);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

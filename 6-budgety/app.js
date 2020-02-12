@@ -104,25 +104,18 @@ var budgetController = (function () {
 
         deleteItem: function (type, id) {
             var allIDs, index;
-            
-            console.log(type, data.allItems[type], data.allItems)
-            
             allIDs = data.allItems[type].map(function(current) {
                 return current.id;
             });
-            console.log(allIDs);
 
             index = allIDs.indexOf(id);
 
             if (index !== -1) {
                 data.allItems[type].splice(index, 1);
             }
-
-
         },
         
         calculateBudget: function () {
-
             // calculate total income and expenses
             calculateTotal('exp');
             calculateTotal('inc');
@@ -137,7 +130,6 @@ var budgetController = (function () {
             } else {
                 data.percentage = -1;
             };
-            
         },
 
         getbudget: function(){
@@ -230,11 +222,8 @@ var UIController = function () {
             } else {
                 document.querySelector(DOMstrings.percentageLabel).textContent = '';
             }            
-            
-            //console.log(object);
 
             object.allExpenses.forEach(function(expense) {
-                console.log(object, expense);
                 expense.percentage = Math.round((expense.value / object.totalIncome) * 100);
                 document.getElementById("item__percentage-" + expense.id).innerHTML = expense.percentage;
                 
@@ -245,14 +234,10 @@ var UIController = function () {
             var now, year, month, months;
             
             now = new Date();
-
             months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             month = now.getMonth();
-
             year = now.getFullYear();
-            //console.log(month, year)
             document.querySelector(DOMstrings.dateLabel).textContent = months[month] + ' ' + year;
-      
         },
 
         changeType: function() {
@@ -262,7 +247,6 @@ var UIController = function () {
                 DOMstrings.inputDescription + ',' +
                 DOMstrings.inputValue);
                
-            console.log(fields);
             var input = UIController.getInput(); 
             var color = 'red';
             if(input.type === 'inc') {
@@ -286,20 +270,14 @@ var UIController = function () {
             // 55000 --> 55.000,00
 
             */
+            
+            // afronden op 2 decimalen, gescheiden met een punt. = string
+            number = number.toFixed(2);   
 
-            // 55.000,00
-
-         //   number = Math.abs(number);
-            number = number.toFixed(2);   // afronden op 2 decimalen, gescheiden met een punt. = string
-            console.log(number);
-
-            numberSplit = number.split('.')     // getal splitsen na de punt. Is array met sub strings
-            console.log(numberSplit);
+            // getal splitsen na de punt. Is array met sub strings
+            numberSplit = number.split('.');
             
             integer = numberSplit[0] + "";
-            console.log(integer);
-            console.log(integer.length);
-
             decimals = numberSplit[1];
             var newInteger = "";
             
@@ -338,11 +316,7 @@ var controller = (function(budgetController, UIController) {
         });
 
         document.querySelector(DOMstrings.overallContainer).addEventListener('click', controlDeleteItem);
-
         document.querySelector(DOMstrings.inputType).addEventListener('change', UIController.changeType);
-
-
-
     };
 
     var controlDeleteItem = function (eventClick) {
@@ -375,7 +349,6 @@ var controller = (function(budgetController, UIController) {
         var budgetReturn = budgetController.getbudget();
 
         // 3. display the budget
-        // console.log(budgetReturn);
         UIController.displayBudget(budgetReturn);
     };
 
@@ -407,7 +380,6 @@ var controller = (function(budgetController, UIController) {
         }
     };
     
-  
 }) (budgetController, UIController);
 
 controller.init();

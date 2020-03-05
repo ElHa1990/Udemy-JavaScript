@@ -1,7 +1,10 @@
 import {elements, startLoader, stopLoader} from './views/base';
+
 import Search from './models/Search';
 import * as searchView from './views/searchView';
+
 import Recipe from './models/Recipe';
+import * as recipeView from './views/recipeView';
 
 /* Global state of the app
 - search object
@@ -72,6 +75,12 @@ const controlRecipe = async () => {
 
     if (id) {
         // prepare UI 
+        recipeView.clearRecipe();
+        startLoader(elements.recipe);
+
+        // highlight selected recipe
+        if (state.search) {
+            searchView.highlightSelectedRecipe(id)};
 
         // create new recipe object
         state.recipe = new Recipe(id);
@@ -87,9 +96,9 @@ const controlRecipe = async () => {
         state.recipe.calcCookingTime();
         state.recipe.calcServings();
         
-
         // show recipe
-        console.log(state.recipe);
+        stopLoader();
+        recipeView.showRecipe(state.recipe);
 
         } catch (error) {
             alert('Sorry, something went wrong. Try again!');
@@ -99,8 +108,3 @@ const controlRecipe = async () => {
 
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
-
-
-
-
-

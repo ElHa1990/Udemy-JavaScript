@@ -1,9 +1,9 @@
 import {elements, startLoader, stopLoader} from './views/base';
 
 import Search from './models/Search';
-import * as searchView from './views/searchView';
-
 import Recipe from './models/Recipe';
+import List from './models/List'; 
+import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 
 /* Global state of the app
@@ -53,14 +53,14 @@ elements.searchBar.addEventListener('submit', eventObject => {
 // click to next or previous page
 elements.searchResultPages.addEventListener('click', eventObject => {
     const button = eventObject.target.closest('.btn-inline')
-    console.log(button);
+    //console.log(button);
 
     
     if (button) {
         const goToPage = parseInt(button.dataset.goto, 10);
         searchView.clearResults();
         searchView.renderResults(state.search.recipes, goToPage);
-        console.log(goToPage);
+        //console.log(goToPage);
     }
 });
 
@@ -71,7 +71,7 @@ const controlRecipe = async () => {
     
     // get id from url    
     const id = window.location.hash.replace('#', '');
-    console.log(id);
+    //console.log(id);
 
     if (id) {
         // prepare UI 
@@ -108,3 +108,25 @@ const controlRecipe = async () => {
 
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+
+// Recipe button clicks
+elements.recipe.addEventListener('click', eventObject => {
+    if(eventObject.target.matches('.btn-decrease, .btn-decrease *')){
+
+        // if decrease button is clicked
+         if (state.recipe.servings > 1) {
+             state.recipe.updateServings('dec');
+             recipeView.clearServings(state.recipe.servings);
+             recipeView.updateServingsIngredients(state.recipe);
+         }
+    } else if (eventObject.target.matches('.btn-increase, .btn-increase *')){
+        
+        // if increase button is clicked
+        state.recipe.updateServings('inc');
+        recipeView.clearServings(state.recipe.servings);
+        recipeView.updateServingsIngredients(state.recipe);
+    }
+    // console.log(state.recipe);
+});
+
+window.test= new List();

@@ -20,7 +20,7 @@ export const highlightSelectedRecipe = id => {
     document.querySelector(`.results__link[href*="${id}"]`).classList.add('results__link--active')
 }
 
-function limitTitle(title, limit = 17) {
+export const limitTitle = (title, limit = 17) => {
     let newTitle = "";
         if (title.length > limit) {
               newTitle = `${title.substr(0, 17)}...`;

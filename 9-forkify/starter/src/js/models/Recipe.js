@@ -13,10 +13,8 @@ export default class Recipe {
             this.image = result.data.recipe.image_url;
             this.ingredients = result.data.recipe.ingredients;          
             this.url = result.data.recipe.source_url;
-            
-            console.log(result);
+        
         } catch(error) {
-            console.log(error);
             alert('Oops, something went wrong. Try again!')
         }
     }
@@ -105,7 +103,6 @@ export default class Recipe {
         });
 
         this.servings = newServings;
-        console.log()
 
 
     }
